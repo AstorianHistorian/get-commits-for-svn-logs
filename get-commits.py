@@ -10,13 +10,13 @@ opt1_value = args.start_rev
 opt2_value = args.end_rev
 opt3_value = args.svn_repo_path
 
-line = f"svn log -r {opt1_value}:{opt2_value} {opt3_value} -l 100 && exit"
+line = f"svn log -r {opt1_value}:{opt2_value} {opt3_value} -l 15"
 
 def write():
-    with open('$HOME/Desktop/'+'output.log','r') as f:
+    with open('//home/dmitry/Desktop/output.log','r') as f:
         ln = f.readlines()
     
-    with open('$HOME/Desktop/'+'output.log','w') as f:
+    with open('//home/dmitry/Desktop/output.log','w') as f:
         for line in ln:
             if "|" in line:
                 line = line.split("|")
@@ -27,5 +27,5 @@ def write():
                 f.write(f"  -{line}")
 
 
-os.system(f'cmd /k "{line}" > output.log')
+os.system(f'{line} > //home/dmitry/Desktop/output.log')
 write()
