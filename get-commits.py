@@ -15,8 +15,6 @@ opt_value2 = args.end_rev
 opt_value3 = args.svn_repo_path
 opt_value4 = args.file_name
 
-line = f"svn log -r {opt_value1}:{opt_value2} {opt_value3} {opt_value4} -l 15"
-
 def write():
         with open('//home/dmitry/Desktop/output.log','r') as f:
             ln = f.readlines()
@@ -32,7 +30,7 @@ def write():
                     f.write(f"  -{line}")
 
 if opt_value4 != '':
-    os.system(f"svn log --search {opt_value4} -r {opt_value1}:{opt_value2} {opt_value3} -l 15> //home/dmitry/Desktop/output.log")
+    os.system(f"svn log --search {opt_value4} -r {opt_value1}:{opt_value2} {opt_value3} > //home/dmitry/Desktop/output.log")
 else:    
-    os.system(f"svn log -r {opt_value1}:{opt_value2} {opt_value3} -l 15 > //home/dmitry/Desktop/output.log")
+    os.system(f"svn log -r {opt_value1}:{opt_value2} {opt_value3} > //home/dmitry/Desktop/output.log")
 write()
