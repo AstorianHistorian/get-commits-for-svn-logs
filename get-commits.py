@@ -2,11 +2,13 @@
 import argparse
 import os
 
+df = "*.txt*"
+
 parser = argparse.ArgumentParser(description='Script to find commits.')
 parser.add_argument("--start-rev", type=str, default=1)
 parser.add_argument("--end-rev", type=str, default='HEAD')
-parser.add_argument("--svn-repo-path", type=str, default='https://svn.code.sf.net/p/codeblocks/code/trunk')
-parser.add_argument("--file-name", type=str, default='')
+parser.add_argument("--svn-repo-path", type=str, default='http://svn.code.sf.net/p/keepass/code/trunk/')
+parser.add_argument("--file-name", type=str, default=f'{df}')
 args = parser.parse_args()
 opt_value1 = args.start_rev
 opt_value2 = args.end_rev
@@ -30,6 +32,7 @@ def write():
                     f.write(f"  -{line}")
 
 if opt_value4 != '':
-    os.system(f"svn blame {opt_value3}> //home/dmitry/Desktop/outputfile.log")
-os.system(f'{line} > //home/dmitry/Desktop/output.log')
+    os.system(f"svn log --search {opt_value4} -r {opt_value1}:{opt_value2} {opt_value3} -l 15> //home/dmitry/Desktop/output.log")
+else:    
+    os.system(f"svn log -r {opt_value1}:{opt_value2} {opt_value3} -l 15 > //home/dmitry/Desktop/output.log")
 write()
