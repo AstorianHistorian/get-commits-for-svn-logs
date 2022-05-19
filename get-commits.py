@@ -1,8 +1,10 @@
 #! /usr/bin/python3
 import argparse
 import os
+from pathlib import Path
 
 df = "*.txt*"
+home = str(Path.home())
 
 parser = argparse.ArgumentParser(description='Script to find commits.')
 parser.add_argument("--start-rev", type=str, default=1)
@@ -16,10 +18,10 @@ opt_value3 = args.svn_repo_path
 opt_value4 = args.file_name
 
 def write():
-        with open('//home/dmitry/Desktop/output.log','r') as f:
+        with open(f'/{home}/Desktop/logs/output.log','r') as f:
             ln = f.readlines()
 
-        with open('//home/dmitry/Desktop/output.log','w') as f:
+        with open(f'/{home}/Desktop/logs/output.log','w') as f:
             for line in ln:
                 if "|" in line:
                     line = line.split("|")
@@ -29,8 +31,10 @@ def write():
                 else:
                     f.write(f"  -{line}")
 
+os.system("mkdir $HOME/Desktop/logs/")
+
 if opt_value4 != '':
-    os.system(f"svn log --search {opt_value4} -r {opt_value1}:{opt_value2} {opt_value3} > //home/dmitry/Desktop/output.log")
+    os.system(f"svn log --search {opt_value4} -r {opt_value1}:{opt_value2} {opt_value3} > $HOME/Desktop/logs/output.log")
 else:    
-    os.system(f"svn log -r {opt_value1}:{opt_value2} {opt_value3} > //home/dmitry/Desktop/output.log")
+    os.system(f"svn log -r {opt_value1}:{opt_value2} {opt_value3} > $HOME/Desktop/logs/output.log")
 write()
